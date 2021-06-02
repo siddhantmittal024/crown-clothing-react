@@ -1,13 +1,26 @@
+import CustomButton from '../custom-button/custom-button.component';
 import './collection-item.styles.scss';
+import { connect } from 'react-redux';
+import { addItem } from '../../redux/cart/cartAction';
 
-const CollectionItem = ({ id, name, imageUrl, price }) => (
+const CollectionItem = ({ item, addItem }) => (
   <div className="collection-item">
-    <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
+    <div
+      className="image"
+      style={{ backgroundImage: `url(${item.imageUrl})` }}
+    />
     <div className="collection-footer">
-      <span className="name">{name}</span>
-      <span className="price">{price}</span>
+      <span className="name">{item.name}</span>
+      <span className="price">{`$${item.price}`}</span>
     </div>
+    <CustomButton inverted onClick={() => addItem(item)}>
+      Add to cart
+    </CustomButton>
   </div>
 );
 
-export default CollectionItem;
+const mapDispatchToProps = (dispatch) => ({
+  addItem: (item) => dispatch(addItem(item))
+});
+
+export default connect(null, mapDispatchToProps)(CollectionItem);
