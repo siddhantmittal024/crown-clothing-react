@@ -12,7 +12,7 @@ const StripeCheckoutButton = ({ price }) => {
     'pk_test_51IkWd7SDFnEwkem8hfEq8HMAG62nlPQjNvN1PulIZ6rxI7uR5C7kJSfNYWiMJJBTnpVQbxNo2l9OVfkOqhgePhqA00teFJWLDX';
   return (
     <StripeCheckout
-      label="Pay Now"
+      label="Pay Now 💳"
       name="CROWN CLOTHING Ltd."
       billingAddress
       shippingAddress
