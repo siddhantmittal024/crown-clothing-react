@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const StripeCheckoutButton = ({ price }) => {
-  const priceForStripe = price * 100;
+  const priceForStripe = price * 70;
   const publishableKey =
     'pk_test_51IkWLHSHzFLZuNVkGBxUqbqh31G9rf4muH6XOgR92rSxsW8zwMrr6VBWLjqiT3WNNrwAo85y6S6t1NTQGUGTORwW00oToTr39z';
 
