@@ -1,15 +1,32 @@
 import StripeCheckout from 'react-stripe-checkout';
 import { toast } from 'react-toastify';
-
-const onToken = (token) => {
-  console.log(token);
-  toast.success('Payment Successful!');
-};
+import axios from 'axios';
 
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
   const publishableKey =
-    'pk_test_51IkWd7SDFnEwkem8hfEq8HMAG62nlPQjNvN1PulIZ6rxI7uR5C7kJSfNYWiMJJBTnpVQbxNo2l9OVfkOqhgePhqA00teFJWLDX';
+    'pk_test_51IkWLHSHzFLZuNVkGBxUqbqh31G9rf4muH6XOgR92rSxsW8zwMrr6VBWLjqiT3WNNrwAo85y6S6t1NTQGUGTORwW00oToTr39z';
+
+  const onToken = (token) => {
+    axios({
+      url: 'payment',
+      method: 'post',
+      data: {
+        amount: priceForStripe,
+        token
+      }
+    })
+      .then((response) => {
+        toast.success('Payment Successful!');
+      })
+      .catch((error) => {
+        console.log('Payment error: ', error);
+        toast.error(
+          'There was an issue with your payment. Please be sure you use the provided credit card!'
+        );
+      });
+  };
+
   return (
     <StripeCheckout
       label="Pay Now 💳"
