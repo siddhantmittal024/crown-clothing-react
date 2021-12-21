@@ -1,4 +1,4 @@
-import './App.css';
+import { GlobalStyle } from './global.styles';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Homepage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
@@ -20,6 +20,7 @@ const App = () => {
 
   return (
     <div>
+    <GlobalStyle/>
       <Header />
       <Switch>
         <Route exact path="/" component={Homepage} />
