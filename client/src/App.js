@@ -1,14 +1,17 @@
+import React, { useEffect, lazy, Suspense } from 'react';
 import { GlobalStyle } from './global.styles';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Homepage from './pages/homepage/homepage.component';
-import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
-import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
 import { selectCurrentUser } from './redux/user/userSelectors';
-import CheckoutPage from './pages/checkout/checkout.component';
 import { checkUserSession } from './redux/user/userAction';
+
+const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
+const ShopPage = lazy(() => import('./pages/shop/shop.component'));
+const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
+const SignInAndSignUp = lazy(() =>
+  import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component')
+);
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -20,19 +23,21 @@ const App = () => {
 
   return (
     <div>
-    <GlobalStyle/>
+      <GlobalStyle />
       <Header />
       <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route exact path="/checkout" component={CheckoutPage} />
-        <Route
-          exact
-          path="/signin"
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
-          }
-        />
+        <Suspense fallback={<div>...Loading</div>}>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+            }
+          />
+        </Suspense>
       </Switch>
     </div>
   );
