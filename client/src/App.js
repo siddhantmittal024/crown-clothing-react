@@ -5,7 +5,7 @@ import Header from './components/header/header.component';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import { checkUserSession } from './redux/user/userAction';
-
+import Spinner from './components/spinner/spinner.component';
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
@@ -26,7 +26,7 @@ const App = () => {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Suspense fallback={<div>...Loading</div>}>
+        <Suspense fallback={<Spinner />}>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
