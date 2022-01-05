@@ -9,14 +9,12 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 const port = process.env.PORT || 8080;
-const host = '0.0.0.0'
 
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(enforce.HTTPS({trustProtoHeader: true}));
   app.use(express.static(path.join(__dirname, 'client/build')));
 
   app.get('*', function (req, res) {
@@ -24,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(port,host, (error) => {
+app.listen(port, (error) => {
   if (error) throw error;
   console.log('Server running on port ' + port);
 });
