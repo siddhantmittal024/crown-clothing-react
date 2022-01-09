@@ -8,13 +8,13 @@ import {
 } from './cartAction';
 
 describe('toggleCartHidden action', () => {
-  it('should create the toggleHidden action', () => {
+  test('should create the toggleHidden action', () => {
     expect(toggleCartHidden().type).toEqual(CartActionTypes.TOGGLE_CART_HIDDEN);
   });
 });
 
 describe('addItem action', () => {
-  it('should create the addItem action', () => {
+  test('should create the addItem action', () => {
     const mockItem = {
       id: 1
     };
@@ -27,7 +27,7 @@ describe('addItem action', () => {
 });
 
 describe('removeItem action', () => {
-  it('should create the removeItem action', () => {
+  test('should create the removeItem action', () => {
     const mockItem = {
       id: 1
     };
@@ -40,7 +40,7 @@ describe('removeItem action', () => {
 });
 
 describe('clearItemFromCart action', () => {
-  it('should create the clearItemFromCart action', () => {
+  test('should create the clearItemFromCart action', () => {
     const mockItem = {
       id: 1
     };
@@ -53,7 +53,7 @@ describe('clearItemFromCart action', () => {
 });
 
 describe('clearCart action', () => {
-  it('should create the clearCart action', () => {
+  test('should create the clearCart action', () => {
     expect(clearCart().type).toEqual(CartActionTypes.CLEAR_CART);
   });
 });

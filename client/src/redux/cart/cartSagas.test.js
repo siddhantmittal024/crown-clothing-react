@@ -5,7 +5,7 @@ import { clearCart } from './cartAction';
 import { clearCartSignOut, onSignOutSuccess } from './cartSagas';
 
 describe('on signout success saga', () => {
-  it('should trigger on SIGN_OUT_SUCCESS', async () => {
+  test('should trigger on SIGN_OUT_SUCCESS', async () => {
     const generator = onSignOutSuccess();
     expect(generator.next().value).toEqual(
       takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearCartSignOut)
@@ -14,7 +14,7 @@ describe('on signout success saga', () => {
 });
 
 describe('clear cart on signout saga', () => {
-  it('should fire clearCart', () => {
+  test('should fire clearCart', () => {
     const generator = clearCartSignOut();
     expect(generator.next().value).toEqual(put(clearCart()));
   });

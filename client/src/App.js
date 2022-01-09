@@ -2,7 +2,8 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { GlobalStyle } from './global.styles';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from './components/header/header.component';
-import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import { checkUserSession } from './redux/user/userAction';
 import Spinner from './components/spinner/spinner.component';
@@ -15,13 +16,10 @@ const SignInAndSignUp = lazy(() =>
   import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component')
 );
 
-const App = () => {
-  const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
-
+const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
-    dispatch(checkUserSession());
-  }, [dispatch]);
+    checkUserSession();
+  }, [checkUserSession]);
 
   return (
     <div>
@@ -47,4 +45,12 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

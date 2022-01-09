@@ -7,18 +7,18 @@ const initialState = {
 };
 
 describe('cartReducer', () => {
-  it('should return initial state', () => {
+  test('should return initial state', () => {
     expect(cartReducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should toggle hidden with toggleHidden action', () => {
+  test('should toggle hidden with toggleHidden action', () => {
     expect(
       cartReducer(initialState, { type: CartActionTypes.TOGGLE_CART_HIDDEN })
         .hidden
     ).toBe(false);
   });
 
-  it('should increase quantity of matching item by 1 if addItem action fired with same item as payload', () => {
+  test('should increase quantity of matching item by 1 if addItem action fired with same item as payload', () => {
     const mockItem = {
       id: 1,
       quantity: 3
@@ -37,7 +37,7 @@ describe('cartReducer', () => {
     ).toBe(4);
   });
 
-  it('should decrease quantity of matching item by 1 if removeItem action fired with same item as payload', () => {
+  test('should decrease quantity of matching item by 1 if removeItem action fired with same item as payload', () => {
     const mockItem = {
       id: 1,
       quantity: 3
@@ -56,7 +56,7 @@ describe('cartReducer', () => {
     ).toBe(2);
   });
 
-  it('should remove item from cart if clearItemFromCart action fired with payload of existing item', () => {
+  test('should remove item from cart if clearItemFromCart action fired with payload of existing item', () => {
     const mockItem = {
       id: 1,
       quantity: 3
@@ -75,7 +75,7 @@ describe('cartReducer', () => {
     ).toBe(false);
   });
 
-  it('should clear cart if clearCart action fired', () => {
+  test('should clear cart if clearCart action fired', () => {
     const mockPrevState = {
       hidden: true,
       cartItems: [
