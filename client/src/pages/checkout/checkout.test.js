@@ -1,6 +1,12 @@
 import React from 'react';
-import { render } from 'enzyme';
-import CheckoutPage  from './checkout.component';
+import { shallow } from 'enzyme';
+import CheckoutPage from './checkout.component';
+import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+
+const mockStore = configureMockStore([thunkMiddleware]);
+const store = mockStore({});
 
 let wrapper;
 beforeEach(() => {
@@ -8,7 +14,11 @@ beforeEach(() => {
     cartItems: [],
     total: 100
   };
-  wrapper = render(<CheckoutPage {...mockProps} />);
+  wrapper = shallow(
+    <Provider store={store}>
+      <CheckoutPage {...mockProps} />
+    </Provider>
+  );
 });
 
 test('should render CheckoutPage component', () => {
