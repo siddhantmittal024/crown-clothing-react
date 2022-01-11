@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { CartDropdown } from './cart-dropdown.component';
 import CartItem from '../cart-item/cart-item.component';
 
-//import { toggleCartHidden } from '../../redux/cart/cartAction';
+import { toggleCartHidden } from '../../redux/cart/cartAction';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -43,9 +43,9 @@ describe('CartDropdown component', () => {
   });
 
   test('should call history.push when button is clicked', () => {
-    //wrapper.find('CartDropdownButton').at(0).simulate('click');
-    //expect(mockHistory.push).toHaveBeenCalled();
-    //expect(mockDispatch).toHaveBeenCalledWith(toggleCartHidden());
+    wrapper.find('CartDropdownButton').at(0).simulate('click');
+    expect(mockHistory.push).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledWith(toggleCartHidden());
   });
 
   test('should render an equal number of CartItem components as the cartItems prop', () => {
